@@ -1,7 +1,7 @@
 {
-  "name": "shive-studios",
+  "name": "mane-experience",
   "version": "1.0.0",
-  "description": "App for Shive Studïos, LLC",
+  "description": "App for the MANE experience",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -17,6 +17,6 @@
     "passport": "*",
     "passport-jwt": "*"
   },
-  "author": "Shïve Studios, LLC",
+  "author": "Kalen Collins, Jacob Nance, Haley Young",
   "license": "ISC"
 }
