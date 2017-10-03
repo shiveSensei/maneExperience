@@ -1,12 +1,13 @@
 //required modules
 const express = require('express'),
  mongoose = require('mongoose'),
- MongoClient = require('mongodb').MongoClient,
- co = require('co'),
+ //MongoClient = require('mongodb').MongoClient,
  bodyParser = require('body-parser'),
  cors = require('cors');
 
- const config = require('./config/database');
+const config = require('./config/database');
+const Events = require('./routes/events');
+const Categories = require('../portfolio/routes/categories');
 
 //connect to database
 mongoose.connect(config.database);
@@ -24,8 +25,7 @@ mongoose.connection.on('error', (err) => {
 //initilize Express app
 const app = express();
 
-const Services = require('./routes/services');
-const Categories = require('../portfolio/routes/categories');
+
 //port number
 const port = 3000;
 
@@ -39,7 +39,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 
-app.use('/api/services', Services);
+app.use('/api/events', Events);
 app.use('/api/categories', Categories);
 
 app.get('/', (req, res) => {

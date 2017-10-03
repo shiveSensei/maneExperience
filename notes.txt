@@ -1,5 +1,13 @@
-Services Offered-
-Web Dev, Photo
+Modles to be made
+======================
+Awards
+
+Functionality to be added
+===========================
+Friends/adding friends
+QR code to events
+
+
 
 git init
 git remote add origin <url>

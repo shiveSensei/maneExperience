@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const config = require('../config/database');
 const Schema = require('mongoose').Schema;
-const co = require('co');
 //Service Schema
 
 

@@ -3,12 +3,9 @@ const config = require('../config/database');
 const co = require('co');
 const Schema = require('mongoose').Schema;
 const Category = require('../models/category');
-//Service Schema
+//Event Schema
 
-
-
-
-const ServiceSchema = mongoose.Schema({
+const EventSchema = mongoose.Schema({
 	name: {
 		type: String,
 		required: true
@@ -25,25 +22,25 @@ const ServiceSchema = mongoose.Schema({
 
 });
 
-const Service = module.exports = mongoose.model('Service', ServiceSchema);
+const Event = module.exports = mongoose.model('Event', EventSchema);
 
 //---------------------FUNCTIONS
 
-//Get Services
-module.exports.getServices = function (callback){
+//Get Events
+module.exports.getEvents = function (callback){
 
-	Service.find(callback);
+	Event.find(callback);
 
 }
 
-module.exports.getServiceById = function(id,callback){
-	Service.findById(id, callback);
+module.exports.getEventById = function(id,callback){
+	Event.findById(id, callback);
 }
 
 
 
 //Add Service to db
-module.exports.addService = function (newProduct, callback) {
-	newProduct.save(callback);
+module.exports.addEvent = function (newEvent, callback) {
+	newEvent.save(callback);
 
 }
