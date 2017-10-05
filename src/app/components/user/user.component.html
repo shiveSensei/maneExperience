@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+  <style>
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+    td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+  </style>
+</head>
+<body>
+  <br>
+  <font size="6">Users</font>
+  <br>
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>W Number</th>
+      <th>Admin</th>
+      <th>Date</th>
+      <th></th>
+    </tr>
+    <tr *ngFor="let user of users">
+      <td>{{ user.name }}</td>
+      <td>{{ 'W' + user.wnum }}</td>
+      <td>{{ user.isAdmin }}</td>
+      <td>{{ user.date }}</td>
+      <td> 
+        <div>
+            <a href="#editPopup" data-rel="popup" class="">Edit</a>
+              <div data-role="popup" id="editPopup" class="ui-content" style="min-width:250px;">
+                <form>
+                  <div>
+                    <h3>Edit User</h3>
+                    <label for="name" class="ui-hidden-accessible">Username:</label>
+                    <input type="text" name="user" id="usrnm" placeholder="Name" [(ngModel)]="name">
+                    <label for="password" class="ui-hidden-accessible">Password:</label>
+                    <input type="password" name="passw" id="pswd" placeholder="Password" [(ngModel)]="password">
+                    <label for="wnum" class="ui-hidden-accessible">W number</label>
+                    <input type="text" name="wnum" id="wnumbr" placeholder="W Number" [(ngModel)]="wnum">
+                    <label for="log">Admin</label>
+                    <input type="checkbox" name="admin" id="log" value="1" data-mini="true" [(ngModel)]="isAdmin">
+                    <input type="submit" data-inline="true" value="Submit" (click)="updateUser()" onclick="location.reload()">
+                  </div>
+                </form>
+              </div>
+          </div>
+        <!--<a href="" (click)="updateUser(user)">Edit </a> | -->
+        <a href="" (click)="deleteUser(user)">Delete </a>
+      </td>
+    </tr>
+  </table><br>
+  <div style="text-align:center;">
+    <a href="#createPopup" data-rel="popup" class="">Create User</a>
+      <div data-role="popup" id="createPopup" class="ui-content" style="min-width:250px;">
+        <form>
+          <div>
+            <h3>Create User</h3>
+            <label for="name" class="ui-hidden-accessible">Username:</label>
+            <input type="text" name="user" id="usrnm" placeholder="Name" [(ngModel)]="name">
+            <label for="password" class="ui-hidden-accessible">Password:</label>
+            <input type="password" name="passw" id="pswd" placeholder="Password" [(ngModel)]="password">
+            <label for="wnum" class="ui-hidden-accessible">W number</label>
+            <input type="text" name="user" id="usrnm" placeholder="W Number" [(ngModel)]="wnum">
+            <label for="log">Admin</label>
+            <input type="checkbox" name="admin" id="log" value="1" data-mini="true" [(ngModel)]="isAdmin">
+            <input type="submit" data-inline="true" value="Submit" (click)="createUser()" onclick="location.reload()">
+          </div>
+        </form>
+      </div>
+  </div>
+<br><br>
+<!--<font size=5>Create/Edit User</font>
+<form (submit)="createUser()">
+    <label>Name:</label><br>
+    <input name="name" type="text" [(ngModel)]="name"><br>
+    <label>W-Number:</label><br>
+    <input name="wnum" type="text" [(ngModel)]="wnum"><br>
+    <label>Password:</label><br>
+    <input name="password" type="password" [(ngModel)]="password"><br>
+    <label>Admin:</label><br>
+    <input name="isAdmin" type="radio" value="true" [(ngModel)]="isAdmin">Yes<br>
+    <input name="isAdmin" type="radio" value="false" [(ngModel)]="isAdmin">No<br>
+    <input type="submit" value="Submit" onclick="doStuff()" onclick="location.reload()" >
+</form>-->
+
+</body>
+</html>
+
+<!-- Test Code -->
+<!--
+<ul>
+  <li *ngFor="let user of users"> {{ user.name + '  W#' + user.wnum}} 
+      <a href="" (click)="updateUser(user)">Edit</a>|
+      <a href="" (click)="deleteUser(user)">Delete</a>
+  </li>
+</ul>-->
