@@ -1,7 +1,4 @@
 const router = require('express').Router();
-const config = require('../config/database');
-const co = require('co');
-
 const Event = require('../models/event');
 
 //get all Events
