@@ -6,21 +6,32 @@ const config = require('../config/database');
 const UserSchemea = mongoose.Schema({
 	name: {
 		type: String,
-		//requried: true
+		required: true,
 	},
-	email: {
-		type: String,
-		//required: true
+    wnum: {
+        type: String,
+        length: 7,
+		required: true,
+		unique: true
 	},
-
-	username: {
-		type: String,
-		//required: true
-	},
-
 	password: {
 		type: String,
-		requried: true
+		required: true	
+	},
+	isAdmin: {
+		type: Boolean,
+		required: true
+	},
+	date: {
+		type: Date,
+		default: Date.now
+		
+	},
+	registeredEvents: {
+		type: [String]
+	},
+	participatedEvents: {
+		type: [String]
 	}
 });
 
@@ -28,28 +39,45 @@ const User = module.exports = mongoose.model('User', UserSchemea);
 
 //---------------------FUNCTIONS
 
+//Get all users
+module.exports.getUsers = function (callback){
+
+	User.find(callback);
+}
+
 //Get user by id
 module.exports.getUserByID = function(id, callback){
 	User.findById(id, callback);
 }
+
 //Get user by username
 module.exports.getUserByUsername = function(username, callback){
-	const query = {username: username}
+	const query = {username: username};
 	User.findOne(query, callback);
 }
+
 //Add user
 module.exports.addUser = function(newUser, callback){
-bcrypt.genSalt(10,(err, salt) =>{
-	bcrypt.hash(newUser.password, salt, (err, hash)=>{
-		if(err) throw err;
-		newUser.password = hash;
-		newUser.save(callback);
-
-	})
-});
+	bcrypt.genSalt(10,(err, salt) =>{
+		bcrypt.hash(newUser.password, salt, (err, hash)=>{
+			if(err) throw err;
+			newUser.password = hash;
+			newUser.save(callback);
+		})
+	});
 }
 
-//Compare password
+//Delete User
+module.exports.deleteUser = function(callback){
+	User.findByIdAndRemove(id, callback);
+}
+
+//Update User
+module.exports.updateUser = function(query, newValue, callback){
+	User.update(query, newValue, callback);
+}
+
+//Compare password (used for login)
 module.exports.comparePassword = function(candidatePassword, hash, callback) {
 	bcrypt.compare(candidatePassword, hash, (err, isMatch) => {
 		if (err) throw err;

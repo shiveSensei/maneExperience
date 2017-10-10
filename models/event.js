@@ -6,18 +6,26 @@ const Category = require('../models/category');
 //Event Schema
 
 const EventSchema = mongoose.Schema({
-	name: {
+	title: {
 		type: String,
 		required: true
+	},
+	track: {
+		type: [String],
+		enum: ['Resident Track', 'Commuter Track']
 	},
 	description: {
-		type: String,
+		type: String
+	},
+	location: {
+		type: String
+	},
+	date: {
+		type: Date,
 		required: true
 	},
-	category:{
-		type: Schema.Types.ObjectId,
-		ref: 'Category',
-		//required: true
+	time: {
+		type: String
 	}
 
 });
@@ -26,21 +34,35 @@ const Event = module.exports = mongoose.model('Event', EventSchema);
 
 //---------------------FUNCTIONS
 
-//Get Events
+//Get all Events
 module.exports.getEvents = function (callback){
 
 	Event.find(callback);
+};
 
-}
-
+//Get event by id
 module.exports.getEventById = function(id,callback){
-	Event.findById(id, callback);
-}
+	Event.findById(id, (err, event){
+		if (err) {
+			throw err;
+		}else {
+			res.json({eventName: event.name});
+		}
+	});
+};
 
-
-
-//Add Service to db
+//Add Event to db
 module.exports.addEvent = function (newEvent, callback) {
 	newEvent.save(callback);
+};
 
-}
+//Update Event ???
+module.exports.updateEvent = (updatedEvent, callback){
+	updatedEvent.save(callback);
+};
+
+//Remove Event
+module.exports.removeEventById = function(callback){
+	Event.findByIdAndRemove(id, callback);
+
+};

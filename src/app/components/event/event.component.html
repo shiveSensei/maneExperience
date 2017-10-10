@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+  <style>
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+  </style>
+</head>
+<body>
+    <br>
+    <font size="6">Events</font>
+    <br>
+  <table>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Track</th>
+      <th>Location</th>  
+      <th>Date</th>
+      <th>Time</th>
+      <th></th>
+    </tr>
+    <tr *ngFor="let event of events">
+      <td>{{ event.title }}</td>
+      <td>{{ event.description }}</td>
+      <td>{{ event.track }}</td>
+      <td>{{ event.location }}</td>
+      <td>{{ event.date }}</td>
+      <td>{{ event.time }}</td>   
+      <td>
+        <div>
+          <a href="#editEventPopup" data-rel="popup" class="ui-btn ui-btn-inline ui-corner-all ui-icon-check ui-btn-icon-left">Edit</a>
+          <div data-role="popup" id="editEventPopup" class="ui-content" style="min-width:250px;">
+            <form method="post" action="/action_page_post.php">
+              <div>
+                <h3>Edit Event</h3>
+                <label for="title" class="ui-hidden-accessible">Title:</label>
+                <input type="text" name="title" id="usrnm" placeholder="Title" [(ngModel)]="title">
+                <label for="description" class="ui-hidden-accessible">Description:</label>
+                <input type="text" name="description" id="usrnm" placeholder="Description" [(ngModel)]="description">
+      
+                <label for="title" class="ui-hidden-accessible">Location:</label>
+                <input type="text" name="location" id="usrnm" placeholder="Location" [(ngModel)]="location">
+                <label for="title" class="ui-hidden-accessible">Date:</label>
+                <input type="date" name="date" id="usrnm" placeholder="Date" [(ngModel)]="date">
+                <label for="datetime" class="ui-hidden-accessible">Time:</label>
+                <input type="text" name="time" id="usrnm" placeholder="Time" [(ngModel)]="time">
+                  <form>
+                    <select name="track" [(ngModel)]="track">
+                      <option value="Track" disabled selected>Track</option>
+                      <option value="Resident">Resident</option>
+                      <option value="Commuter">Commuter</option>
+                      <option value="Both">Both</option>
+                    </select>
+                  </form>
+                <input type="submit" data-inline="true" value="Submit" (click)="updateEvent()" onclick="location.reload()">
+              </div>
+            </form>
+          </div>
+        </div>
+        <!--<a href="" (click)="">Edit </a>| -->
+        <a href="" (click)="">Delete </a>
+      </td>
+    </tr>
+  </table>
+<br><br>
+<div>
+  <a href="#createEventPopup" data-rel="popup" class="">Create Event</a>
+  <div data-role="popup" id="createEventPopup" class="ui-content" style="min-width:250px;">
+    <form method="post" action="/action_page_post.php">
+      <div>
+        <h3>Edit Event</h3>
+        <label for="title" class="ui-hidden-accessible">Title:</label>
+        <input type="text" name="title" id="usrnm" placeholder="Title" [(ngModel)]="title">
+        <label for="description" class="ui-hidden-accessible">Description:</label>
+        <input type="text" name="description" id="usrnm" placeholder="Description" [(ngModel)]="description">
+
+        <label for="title" class="ui-hidden-accessible">Location:</label>
+        <input type="text" name="location" id="usrnm" placeholder="Location" [(ngModel)]="location">
+        <label for="title" class="ui-hidden-accessible">Date:</label>
+        <input type="date" name="date" id="usrnm" placeholder="Date" [(ngModel)]="date">
+        <label for="datetime" class="ui-hidden-accessible">Time:</label>
+        <input type="text" name="time" id="usrnm" placeholder="Time" [(ngModel)]="time">
+          <form>
+            <select name="track" [(ngModel)]="track">
+              <option value="Track" disabled selected>Track</option>
+              <option value="Resident">Resident</option>
+              <option value="Commuter">Commuter</option>
+              <option value="Both">Both</option>
+            </select>
+          </form>
+        <input type="submit" data-inline="true" value="Submit" (click)="createEvent()" onclick="location.reload()">
+      </div>
+    </form>
+  </div>
+</div>
+</body>
+</html>

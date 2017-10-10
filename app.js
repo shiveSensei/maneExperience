@@ -7,7 +7,13 @@ const express = require('express'),
 
 const config = require('./config/database');
 const Events = require('./routes/events');
-const Categories = require('../portfolio/routes/categories');
+const Users = require('./routes/users');
+
+//port number
+const port = 3000;
+
+//Set static folder
+//app.use(express.static(path.join(__dirname, 'public')));
 
 //connect to database
 mongoose.connect(config.database);
@@ -25,12 +31,7 @@ mongoose.connection.on('error', (err) => {
 //initilize Express app
 const app = express();
 
-
-//port number
-const port = 3000;
-
-//Set static folder
-//app.use(express.static(path.join(__dirname, 'public')));
+//--------------------MIDDLEWARE------------------------//
 
 //Cors middleware
 app.use(cors());
@@ -38,9 +39,9 @@ app.use(cors());
 //Body Parser Middleware
 app.use(bodyParser.json());
 
-
+//Routes
 app.use('/api/events', Events);
-app.use('/api/categories', Categories);
+app.use('/api/users', Users);
 
 app.get('/', (req, res) => {
 	res.send('Invalid Endpoint');
