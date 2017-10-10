@@ -42,7 +42,7 @@ module.exports.getEvents = function (callback){
 
 //Get event by id
 module.exports.getEventById = function(id,callback){
-	Event.findById(id, (err, event){
+	Event.findById(id, (err, event)=>{
 		if (err) {
 			throw err;
 		}else {
@@ -57,7 +57,7 @@ module.exports.addEvent = function (newEvent, callback) {
 };
 
 //Update Event ???
-module.exports.updateEvent = (updatedEvent, callback){
+module.exports.updateEvent = function (updatedEvent, callback){
 	updatedEvent.save(callback);
 };
 

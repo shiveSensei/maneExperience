@@ -1,4 +1,4 @@
-const router = express.Router();
+const router = require('express').Router();
 //const passport = require('passport');
 //const jwt = require('jsonwebtoken');
 const User = require('../models/user');
@@ -26,14 +26,19 @@ router.post('/addUser', (req, res, next)=>{
 });
 
 //Get all users
-router.get('/users', (req, res, next)=>{
+router.get('', (req, res, next)=>{
 
-	User.find(callback);
+	User.getUsers(function(err, users){
+		if(err){
+			throw err;
+		}
+		res.json(users);
+	});
 });
 
 //Get user by id
 module.exports.getUserById = function(id, callback){
-	User.findById(id, (err, user){
+	User.findById(id, (err, user)=>{
 		if(err) {
 			throw err;
 		}else {
