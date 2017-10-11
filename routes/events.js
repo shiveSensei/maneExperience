@@ -1,5 +1,7 @@
 const router = require('express').Router();
 const Event = require('../models/event');
+const passport = require('passport');
+
 
 //get all Events
 router.get('', (req, res, next)=>{
@@ -13,7 +15,7 @@ router.get('', (req, res, next)=>{
 });
 
 //add an event
-router.post('/addEvent', (req, res, next)=>{
+router.post('/addEvent',passport.authenticate('jwt', {session:false}), (req, res, next)=>{
 
 	//create new Event
 	let newEvent = new Event({
@@ -34,7 +36,7 @@ router.post('/addEvent', (req, res, next)=>{
 });
 
 //update an event (stubbed)
-router.put('/updateEvent', (req, res, next)=>{
+router.put('/updateEvent',passport.authenticate('jwt', {session:false}), (req, res, next)=>{
 	//select event by id
 
 	//save changed
@@ -49,7 +51,7 @@ router.put('/updateEvent', (req, res, next)=>{
 });
 
 //remove an event
-router.delete('/removeEvent', (req, res, next)=>{
+router.delete('/removeEvent',passport.authenticate('jwt', {session:false}), (req, res, next)=>{
 
 	Event.removeEventById(id, (err, event)=>{
 

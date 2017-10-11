@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const passport = require('passport');
-const jwt = require('jsonwebtoken');
+//const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 const config = require('../config/database');
 
@@ -13,7 +13,8 @@ router.post('/addUser', (req, res, next)=>{
 		//set required User info
 		name: req.body.name,
 		wnum: req.body.description,
-		password: req.body.password
+		password: req.body.password,
+		isAdmin: false
 	});
 
 	//add new User to db
@@ -37,8 +38,8 @@ router.get('', (req, res, next)=>{
 	});
 });
 
-//Update user (stubbed)
-router.put('/updateUser', (req, res, next)=>{
+//Update user (stubbed for Thomas)
+router.put('/updateUser',passport.authenticate('jwt', {session:false}), (req, res, next)=>{
 	//wnum from request
 	const wnum = req.body.wnum;
 	//check to see if user exists
@@ -61,7 +62,7 @@ router.put('/updateUser', (req, res, next)=>{
 });
 
 //Remove user by id
-router.delete('deleteUser', (req, res, next)=>{
+router.delete('deleteUser',passport.authenticate('jwt', {session:false}), (req, res, next)=>{
 	User.removeEventById(id, (err, event)=>{
 		if (err) {
 			throw err;
