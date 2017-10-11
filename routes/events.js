@@ -33,7 +33,7 @@ router.post('/addEvent', (req, res, next)=>{
 	})
 });
 
-//update a single event
+//update an event (stubbed)
 router.put('/updateEvent', (req, res, next)=>{
 	//select event by id
 
@@ -45,12 +45,10 @@ router.put('/updateEvent', (req, res, next)=>{
 		}else {
 			res.json({success: true, msg: "Event updated", eventName: event.name});
 		}
-	})
-	
-	res.send('UPDATED Event');
+	})	
 });
 
-//remove a single event
+//remove an event
 router.delete('/removeEvent', (req, res, next)=>{
 
 	Event.removeEventById(id, (err, event)=>{

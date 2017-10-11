@@ -64,5 +64,4 @@ module.exports.updateEvent = function (updatedEvent, callback){
 //Remove Event
 module.exports.removeEventById = function(callback){
 	Event.findByIdAndRemove(id, callback);
-
 };

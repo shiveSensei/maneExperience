@@ -50,10 +50,21 @@ module.exports.getUserByID = function(id, callback){
 	User.findById(id, callback);
 }
 
+//Get user by wnumber
+module.exports.getUserByWnumber = function(wnum, callback){
+	const query = {wnum: wnum};
+	User.findone(query, callback);
+}
+
 //Get user by username
 module.exports.getUserByUsername = function(username, callback){
 	const query = {username: username};
 	User.findOne(query, callback);
+}
+//Get user by email
+module.exports.getUserByEmail = function(email, callback){
+  const query = {email : email}
+  User.findOne(query, callback);
 }
 
 //Add user
@@ -74,6 +85,7 @@ module.exports.deleteUser = function(callback){
 
 //Update User
 module.exports.updateUser = function(query, newValue, callback){
+	//const query = {wnum: wnum}
 	User.update(query, newValue, callback);
 }
 

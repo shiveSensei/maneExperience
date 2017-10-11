@@ -1,8 +1,8 @@
 //required modules
 const express = require('express'),
  mongoose = require('mongoose'),
- //MongoClient = require('mongodb').MongoClient,
  bodyParser = require('body-parser'),
+ passport = require('passport'),
  cors = require('cors');
 
 const config = require('./config/database');
@@ -38,6 +38,13 @@ app.use(cors());
 
 //Body Parser Middleware
 app.use(bodyParser.json());
+
+//passsport middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
+require('./config/passport')(passport);
+
 
 //Routes
 app.use('/api/events', Events);
