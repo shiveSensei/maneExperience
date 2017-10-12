@@ -4,7 +4,7 @@ const passport = require('passport');
 
 
 //get all Events
-router.get('', (req, res, next)=>{
+router.get('/getAll', (req, res, next)=>{
 
 	Event.getEvents(function(err, events){
 		if(err){

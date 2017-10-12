@@ -7,9 +7,10 @@ import { HttpModule } from '@angular/http';
 import { DataService } from './data.service';
 import { UserComponent } from './components/user/user.component';
 import { EventComponent } from './components/event/event.component';
+import { HomeComponent } from './components/home/home.component';
 
 const appRoutes: Routes = [
-  //{path:'', component:},
+  {path:'', component:HomeComponent},
   {path:'user', component:UserComponent},
   {path:'event', component:EventComponent}
 ];
@@ -18,7 +19,8 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     UserComponent,
-    EventComponent
+    EventComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

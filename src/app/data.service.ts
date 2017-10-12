@@ -8,57 +8,62 @@ export class DataService {
   result: any;
 
   constructor(private http: Http) { }
-  
+
+//------------- Login Authentication
+  verifyLogin(username, password){
+    return this.http.post("/api/users/authenticate", username, password)
+    .map(result => this.result = result.json());
+  }
+
 //------------- User CRUD calls
   getUsers(){
-    return this.http.get("/api/users")
-    .map(result => this.result = result.json().data);
+    return this.http.get("/api/users/getAll")
+    .map(result => this.result = result.json());
   }
 
   getUser(){
-    return this.http.get("/api/user")
-    .map(result => this.result = result.json().data);
+    return this.http.get("/api/users/getUser")
+    .map(result => this.result = result.json());
   }
 
   addUser(newUser){
-    console.log('reached dataService');
-    return this.http.post("/api/addUser", newUser)
-    .map(res => res.json().data);
+    return this.http.post("/api/users/addUser", newUser)
+    .map(res => res.json());
   }
 
   updateUser(user){
-    return this.http.put("/api/updateUser", user)
-    .map(res => res.json().data);
+    return this.http.put("/api/users/updateUser", user)
+    .map(res => res.json());
   }
   
   deleteUser(user){
-    return this.http.post("/api/deleteUser", user)
-    .map(res => res.json().data);
+    return this.http.post("/api/users/deleteUser", user)
+    .map(res => res.json());
   }
 
 //------------- Event CRUD calls
   getEvents(){
-    return this.http.get("/api/users")
+    return this.http.get("/api/events/getAll")
     .map(result => this.result = result.json().data);
   }
 
   getEvent(){
-    return this.http.get("/api/user")
+    return this.http.get("/api/events")   //no function for this operation
     .map(result => this.result = result.json().data);
   }
 
   addEvent(newUser){
-    return this.http.post("/api/addUser", newUser)
+    return this.http.post("/api/events/addEvent", newUser)
     .map(res => res.json().data);
   }
 
   updateEvent(user){
-    return this.http.put("/api/updateEvent", event)
+    return this.http.put("/api/events/updateEvent", event)
     .map(res => res.json().data);
   }
   
   deleteEvent(event){
-    return this.http.post("/api/deleteEvent", event)
+    return this.http.post("/api/events/removeEvent", event)
     .map(res => res.json().data);
   }
 }

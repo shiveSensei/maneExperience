@@ -1,9 +1,10 @@
 //required modules
 const express = require('express'),
  mongoose = require('mongoose'),
+ //MongoClient = require('mongodb').MongoClient,
  bodyParser = require('body-parser'),
- passport = require('passport'),
- cors = require('cors');
+ cors = require('cors'),
+ path = require('path');
 
 const config = require('./config/database');
 const Events = require('./routes/events');
@@ -39,19 +40,18 @@ app.use(cors());
 //Body Parser Middleware
 app.use(bodyParser.json());
 
-//passsport middleware
-app.use(passport.initialize());
-app.use(passport.session());
-
-require('./config/passport')(passport);
-
-
 //Routes
 app.use('/api/events', Events);
 app.use('/api/users', Users);
 
-app.get('/', (req, res) => {
-	res.send('Invalid Endpoint');
+//app.get('/', (req, res) => {
+//	res.send('Invalid Endpoint');
+//});
+
+app.use(express.static(path.join(__dirname, 'dist')));
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'dist/index.html'));
 });
 
 app.listen(port, () => {
