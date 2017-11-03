@@ -16,3 +16,30 @@ git checkout <branch>
 git add .
 git commit -m "message"
 git push origin <branch>
+
+
+//Backend changes
+**edit schema for events (add attendee array -- takes wnumbers)
+depreciate bcrypt package
+
+//Functions needed
+add attendees to Events
+
+
+
+ios design app
+================
+
+
+JACOB
+==========
+Angular stuff
+
+
+THOMAS
+========
+html mockups of the pages needed
+
+
+
+

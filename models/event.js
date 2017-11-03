@@ -14,6 +14,9 @@ const EventSchema = mongoose.Schema({
 		type: [String],
 		enum: ['Resident Track', 'Commuter Track']
 	},
+	attendees: {
+		type: [String]
+	},
 	description: {
 		type: String
 	},
@@ -55,6 +58,12 @@ module.exports.getEventById = function(id,callback){
 module.exports.addEvent = function (newEvent, callback) {
 	newEvent.save(callback);
 };
+
+//Add Atendees to event
+module.exports.addAttendee = function(wnum, callback) {
+	Event.attendees.push(wnum);
+	Event.save(callback);
+}
 
 //Update Event ???
 module.exports.updateEvent = function (updatedEvent, callback){

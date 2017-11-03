@@ -33,6 +33,22 @@ router.post('/addEvent', (req, res, next)=>{
 	})
 });
 
+//add an attendee
+router.post('/addAttendee', (req, res, next)=>{
+	//set attendee
+	wnum = req.body.wnum;
+
+	//add attendee to Events attendee array
+	Event.addAttendee(wnum, (err, attendee)=>{
+		if (err) {
+			throw err;
+		}else {
+			res.json({success: true, msg: "You have successfully checked in, enjoy!"});
+		}
+	})
+
+})
+
 //update a single event
 router.put('/updateEvent', (req, res, next)=>{
 	//select event by id
