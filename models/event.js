@@ -24,8 +24,7 @@ const EventSchema = mongoose.Schema({
 		type: String
 	},
 	date: {
-		type: Date,
-		required: true
+		type: Date
 	},
 	time: {
 		type: String
@@ -60,9 +59,24 @@ module.exports.addEvent = function (newEvent, callback) {
 };
 
 //Add Atendees to event
-module.exports.addAttendee = function(wnum, callback) {
-	Event.attendees.push(wnum);
-	Event.save(callback);
+module.exports.addAttendee = function(wnum, eTitle, callback) {
+
+	var query = {title: eTitle};
+	var attendee = {attendees: wnum};
+	
+	Event.findOneAndUpdate(query, {$push: attendee}, {safe: true, upsert: true, new: true}, 
+		
+		(err, doc)=>{
+			if (err) {
+				throw err;
+				console.log("Something went wrong");
+			}else {
+				
+				console.log(doc);
+				callback();
+			}	
+	});
+
 }
 
 //Update Event ???

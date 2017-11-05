@@ -21,6 +21,7 @@ router.post('/addEvent', (req, res, next)=>{
 		description: req.body.description,
 		track: req.body.track,
 		location: req.body.location
+		//date: Date.now
 	});
 
 	//save new Event to db
@@ -34,16 +35,22 @@ router.post('/addEvent', (req, res, next)=>{
 });
 
 //add an attendee
-router.post('/addAttendee', (req, res, next)=>{
-	//set attendee
-	wnum = req.body.wnum;
+router.put('/addAttendee', (req, res, next)=>{
 
+	//set attendee
+	const wnum = req.body.wnum;
+	const eTitle = req.body.eTitle;
+	//console.log(wnum, eTitle);
+	
 	//add attendee to Events attendee array
-	Event.addAttendee(wnum, (err, attendee)=>{
+	Event.addAttendee(wnum, eTitle, (err, doc)=>{
+		
 		if (err) {
 			throw err;
+
 		}else {
-			res.json({success: true, msg: "You have successfully checked in, enjoy!"});
+
+			res.json({success: true, msg: "You have successfully checked in, enjoy!", atendee: wnum});
 		}
 	})
 
