@@ -1,5 +1,9 @@
-
-
+ <script>
+        function play(){
+       var audio = document.getElementById("audio");
+       audio.play();
+                 }
+    </script>
 <head>
     <title>CHECK IN PAGE MANE EXPERIENCE</title>
      <meta charset="UTF-8">
@@ -74,3 +78,11 @@
     <li><a routerLink="/event">Events</a></li>
 </ul>
 <router-outlet></router-outlet>
+<footer style= "height: relative;
+    background: #eee;">
+  <div class="footer_logo_div"><a href="/"><img src="http://www.southeastern.edu/_resources/img/black_logo.png" alt="selu black logo" /></a><p>    <a href="#" onclick="play()">Admin</a>
+    <audio id="audio" src="https://niceme.me/nicememe.mp3" ></audio>
+            </div></p>
+  <p>Contact information: <a href="mailto:someone@example.com">
+  someone@example.com</a>.</p>
+</footer>
