@@ -62,7 +62,8 @@ module.exports.addEvent = function (newEvent, callback) {
 
 //Add Atendees to event
 module.exports.addAttendee = function(wnum, eTitle, callback) {
-
+	
+	
 	var query = {title: eTitle};
 	var attendee = {attendees: wnum};
 	

@@ -39,23 +39,30 @@ router.put('/addAttendee', (req, res, next)=>{
 
 	//set attendee
 	const wnum = req.body.wnum;
-	const eTitle = req.body.eTitle;
-	//console.log(wnum, eTitle);
-	
-	//add attendee to Events attendee array
-	Event.addAttendee(wnum, eTitle, (err, doc)=>{
-		
-		if (err) {
-			throw err;
+	const title = req.body.title;
 
-		}else {
-			console.log(doc);
-
-			return res.json({success: true, msg: "You have successfully checked in, enjoy!", atendee: wnum});
+	//check to see if Event exists
+	Event.getEventByTitle(title, (err, event)=>{
+		if (err) throw err;
+		if(!event){
+			return res.json({success: false, msg: "Event does not exist!"});
 		}
-	})
+	
+		//add attendee to Events attendee array
+		Event.addAttendee(wnum, title, (err, doc)=>{
+			
+			if (err) {
+				throw err;
 
-})
+			}else {
+				console.log(doc);
+
+				return res.json({success: true, msg: "You have successfully checked in, enjoy!", atendee: wnum});
+			}
+		});
+	});
+
+});
 
 //Update a single event
 router.post('/updateEvent',/*passport.authenticate('jwt', {session:false}),*/ (req, res, next)=>{
