@@ -4,6 +4,7 @@ const express = require('express'),
  //MongoClient = require('mongodb').MongoClient,
  bodyParser = require('body-parser'),
  cors = require('cors');
+ path = require('path');
 
 const config = require('./config/database');
 const Events = require('./routes/events');
@@ -13,7 +14,7 @@ const Users = require('./routes/users');
 const port = 3000;
 
 //Set static folder
-//app.use(express.static(path.join(__dirname, 'public')));
+//app.use(express.static(path.join(__dirname, 'dist')));
 
 //connect to database
 mongoose.connect(config.database);
@@ -43,8 +44,10 @@ app.use(bodyParser.json());
 app.use('/api/events', Events);
 app.use('/api/users', Users);
 
+
 app.get('/', (req, res) => {
-	res.send('Invalid Endpoint');
+    console.log('Invalid');
+    //res.sendFile(path.join(__dirname, 'dist/index.html'));
 });
 
 app.listen(port, () => {

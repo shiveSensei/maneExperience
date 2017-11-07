@@ -16,6 +16,8 @@ export class EventComponent implements OnInit {
   date: Date;
   time: String;
   message: any;
+  Username: String;
+  Password: String;
 
   constructor(private _dataService: DataService) {
     this._dataService.getEvents()
@@ -23,6 +25,18 @@ export class EventComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  authenticate()
+  {
+    var data = {
+      email: this.Username,
+      password: this.Password
+    }
+    JSON.stringify(data);
+    this._dataService.authenticate(data).subscribe(res =>{
+      console.log(res);
+    });
   }
 
   createUser() {

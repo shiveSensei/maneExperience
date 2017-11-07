@@ -8,7 +8,8 @@ const Category = require('../models/category');
 const EventSchema = mongoose.Schema({
 	title: {
 		type: String,
-		required: true
+		required: true,
+		index: true
 	},
 	track: {
 		type: [String],
@@ -44,13 +45,14 @@ module.exports.getEvents = function (callback){
 
 //Get event by id
 module.exports.getEventById = function(id,callback){
-	Event.findById(id, (err, event)=>{
-		if (err) {
-			throw err;
-		}else {
-			res.json({eventName: event.name});
-		}
-	});
+	const query = {_id: id};
+	Event.findOne(query, callback);
+};
+
+//Get event by title
+module.exports.getEventByTitle = function(title,callback){
+	const query = {title: title};
+	Event.findOne(query, callback);
 };
 
 //Add Event to db
@@ -79,13 +81,12 @@ module.exports.addAttendee = function(wnum, eTitle, callback) {
 
 }
 
-//Update Event ???
+//Update Event 
 module.exports.updateEvent = function (updatedEvent, callback){
 	updatedEvent.save(callback);
 };
 
-//Remove Event
-module.exports.removeEventById = function(callback){
+//Delete Event
+module.exports.removeEventById = function(id, callback){	
 	Event.findByIdAndRemove(id, callback);
-
-};
+}

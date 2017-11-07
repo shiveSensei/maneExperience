@@ -50,10 +50,21 @@ module.exports.getUserByID = function(id, callback){
 	User.findById(id, callback);
 }
 
+//Get user by wnumber
+module.exports.getUserByWnum = function(wnum, callback){
+	const query = {wnum: wnum};
+	User.findOne(query, callback);
+}
+
 //Get user by username
 module.exports.getUserByUsername = function(username, callback){
 	const query = {username: username};
 	User.findOne(query, callback);
+}
+//Get user by email
+module.exports.getUserByEmail = function(email, callback){
+  const query = {email : email}
+  User.findOne(query, callback);
 }
 
 //Add user
@@ -67,13 +78,45 @@ module.exports.addUser = function(newUser, callback){
 	});
 }
 
+//Update pw user
+module.exports.updatePw = function(wnum, newPass, callback){
+	
+	//hash pw
+	bcrypt.genSalt(10,(err, salt) =>{
+		bcrypt.hash(newPass, salt, (err, hash)=>{
+			if(err) throw err;
+			pw = hash;
+
+			//set query and new pw to be passed in
+			var query = {wnum: wnum};
+			var n = {password: pw};
+			console.log(n.password);
+			
+			//Save updated info
+			User.findOneAndUpdate(query, {$set: {password: pw}}, {safe: true, new: true}, 
+		
+				(err, doc)=>{
+					if (err) {
+						throw err;
+						console.log("Something went wrong");
+					}else {
+						
+						console.log(doc);
+						callback();
+					}	
+				});
+			// newUser.save(callback);
+		})
+	});
+}
 //Delete User
-module.exports.deleteUser = function(callback){
+module.exports.removeUserById = function(id, callback){	
 	User.findByIdAndRemove(id, callback);
 }
 
 //Update User
 module.exports.updateUser = function(query, newValue, callback){
+	//const query = {wnum: wnum}
 	User.update(query, newValue, callback);
 }
 

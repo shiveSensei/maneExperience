@@ -9,15 +9,26 @@ export class DataService {
 
   constructor(private http: Http) { }
   
+  // authenticate(data)
+  // {
+  //   return this.http.post("/api/users/authenticate", data)
+  //   .map(result => this.result = result.json())
+  // }
+
+  authenticate(data)
+  {
+    return this.http.post("/api/users/authenticate", data);
+  }
+
 //------------- User CRUD calls
   getUsers(){
     return this.http.get("/api/users")
-    .map(result => this.result = result.json().data);
+    .map(result => this.result = result.json());
   }
 
   getUser(){
     return this.http.get("/api/user")
-    .map(result => this.result = result.json().data);
+    .map(result => this.result = result.json());
   }
 
   addUser(newUser){

@@ -1,6 +1,3 @@
-Modles to be made
-======================
-Awards
 
 Functionality to be added
 ===========================
@@ -19,21 +16,45 @@ git push origin <branch>
 
 
 //Backend changes
-**edit schema for events (add attendee array -- takes wnumbers)
-depreciate bcrypt package
+Updated login function to take wnum/pw, insted of email/pw. 
+Added a function for the user to change his/her password(User.updatePw). updatePw checks if user exists before it changes the pw. This keeps from adding dups/erronious additions to db. Route for using this has been added as well (/updateUser).
 
-//Functions needed
-add attendees to Events
+**Images for Profiles and Events
 
 
 
 ios design app
 ================
+	landscape and protrait mode
+	start digesting RESTful API
+
+____PROFILE______
+	+ change pw
+	+ update image
+	+ withdraw from event
+
+____EVENTS______
+	+ Name
+	+ Desc
+	+ Track (drop down)
+	+ Date/Time
+
+
 
 
 JACOB
 ==========
 Angular stuff
+
+Start on Android frontend 
+
+
+
+
+
+
+
+
 
 
 THOMAS
