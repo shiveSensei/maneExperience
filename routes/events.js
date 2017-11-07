@@ -15,7 +15,7 @@ router.get('', (req, res, next)=>{
 //add an event
 router.post('/addEvent', (req, res, next)=>{
 
-	//create new Event
+	//create new Event model from req data
 	let newEvent = new Event({
 		title: req.body.title,
 		description: req.body.description,
@@ -24,14 +24,24 @@ router.post('/addEvent', (req, res, next)=>{
 		//date: Date.now
 	});
 
-	//save new Event to db
-	Event.addEvent(newEvent, (err, event)=>{
-		if (err) {
-			throw err;
-		}else {
-			return res.json({success: true, msg: "Event added", eventName: event.title});
+	//check to see if Event title is already being used
+	Event.getEventByTitle(newEvent.title, (err, event)=>{
+		if (err) throw err;
+		if (event){
+			return res.json({success: false, msg: "Event already exists!"});
 		}
+
+		//save new Event to db
+		Event.addEvent(newEvent, (err, event)=>{
+			if (err) {
+				throw err;
+			}else {
+				return res.json({success: true, msg: "Event added", eventName: event.title});
+			}
+		})
 	})
+
+	
 });
 
 //add an attendee
@@ -44,29 +54,34 @@ router.put('/addAttendee', (req, res, next)=>{
 	//check to see if Event exists
 	Event.getEventByTitle(title, (err, event)=>{
 		if (err) throw err;
+		//handle when the event does not exists
 		if(!event){
 			return res.json({success: false, msg: "Event does not exist!"});
 		}
-	
-		//add attendee to Events attendee array
-		Event.addAttendee(wnum, title, (err, doc)=>{
-			
-			if (err) {
+
+		//check to see if attendee is already attending
+		Event.isAttending(title, wnum, (err, doc)=>{
+			if (err){
 				throw err;
-
-			}else {
-				console.log(doc);
-
-				return res.json({success: true, msg: "You have successfully checked in, enjoy!", atendee: wnum});
+			} 
+			//if yuser has checked in already, don't allow for them to re-check
+			if(doc){
+				return res.json({success: false, msg:"You have already checked in"});
 			}
-		});
+			//if everything checks out, add user to event
+			Event.addAttendee(wnum, title, (err, doc)=>{
+				if (err) {
+					throw err;
+				}else {
+					return res.json({success: true, msg: "You have successfully checked in, enjoy!", atendee: wnum});
+				}
+			});
+		})
 	});
-
 });
 
 //Update a single event
 router.post('/updateEvent',/*passport.authenticate('jwt', {session:false}),*/ (req, res, next)=>{
-
 	//create new Event model and set request info
 	let newEvent = new Event({
 		title: req.body.title,
@@ -76,18 +91,16 @@ router.post('/updateEvent',/*passport.authenticate('jwt', {session:false}),*/ (r
 		date: Date.now
 	});
 	
-	
 	//check if Event exists
 	User.getEventById(id, (err, event)=>{
-
 		if (err) throw err;
+		//handle when the event does not exist
 		if(!event){
 			return res.json({success: false, msg: "Event not found"});
 		}
 
 		//if event exists, then update data
 		User.updatePw (wnum, newPass, (err, n)=>{
-		
 			if (err){
 				throw err;
 			}else {
@@ -124,14 +137,26 @@ router.post('/updateEvent',/*passport.authenticate('jwt', {session:false}),*/ (r
 router.delete('/removeEvent', (req, res, next)=>{
 	const id = req.body.id;
 
+	//validate id is a real objectID
+	if(!id.match(/^[0-9a-fA-F]{24}$/)){
+
+		return res.json({success:false, msg: "Not a proper objectID"});
+	}
+
+	//if id checks out, proceed to removing Event
 	Event.removeEventById(id, (err, event)=>{
 
 		if (err) {
 			throw err;
-		}else {
-			return res.json({success: true, msg: "Event deleted", eventName: event.name});
-		}
-	});
+			//handle if Event does NOT exists
+			} if(!event){
+				return res.json({success: false, msg: "Event does not exists!"});
+			}else {
+				return res.json({success: true, msg: "Event deleted", eventName: event.name});
+			}
+		});
+
+	
 });
 
 module.exports = router;

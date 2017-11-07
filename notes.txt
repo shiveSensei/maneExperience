@@ -2,7 +2,7 @@
 Functionality to be added
 ===========================
 Friends/adding friends
-QR code to events
+
 
 
 
@@ -16,10 +16,14 @@ git push origin <branch>
 
 
 //Backend changes
-Updated login function to take wnum/pw, insted of email/pw. 
-Added a function for the user to change his/her password(User.updatePw). updatePw checks if user exists before it changes the pw. This keeps from adding dups/erronious additions to db. Route for using this has been added as well (/updateUser).
+*Add events is now validated. Will not add duplicate Titles.
+*Remove events is now validated. Will check to see if the id passed is valid, then checks existance of event before removing.
 
+//Backend TODO
+**Validate update event 
+**Validate addAttendee
 **Images for Profiles and Events
+**QR code to events
 
 
 
@@ -29,7 +33,6 @@ ios design app
 	start digesting RESTful API
 
 ____PROFILE______
-	+ change pw
 	+ update image
 	+ withdraw from event
 
