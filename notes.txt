@@ -16,12 +16,12 @@ git push origin <branch>
 
 
 //Backend changes
-*Add events is now validated. Will not add duplicate Titles.
-*Remove events is now validated. Will check to see if the id passed is valid, then checks existance of event before removing.
+*addEvents is now validated. Will not add duplicate Titles.
+*addAttendee is now validated, will not allow for addition of dupes.
+*removeEvents is now validated. Will check to see if the id passed is valid, then checks existance of event before removing.
 
 //Backend TODO
 **Validate update event 
-**Validate addAttendee
 **Images for Profiles and Events
 **QR code to events
 

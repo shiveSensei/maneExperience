@@ -12,6 +12,22 @@ router.get('', (req, res, next)=>{
 	});
 });
 
+//get a sngle Event
+router.post('/event', (req, res, next)=>{
+	//set id to request
+	const title = req.body.title;
+
+	Event.getEventByTitle(title, (err, event)=>{
+		if (err) throw err; 
+		//if event is not found
+		if(!event){
+			return res.json({success: false, msg: "Sorry, this event does not exist!"});
+		}
+
+		return res.json({success: true, event});
+	})
+})
+
 //add an event
 router.post('/addEvent', (req, res, next)=>{
 
