@@ -1,0 +1,75 @@
+
+
+<html lang="">
+    <style>
+        body {
+            background-image:url('http://www.southeastern.edu/current_students/mane_exp/images/mane-exp.jpg'); 
+            background-color:#2C814D;
+            background-size:cover;
+            background-repeat: repeat-y;
+            background-attachment: fixed;
+            height:100%;
+            width:100%;
+        }   
+        div.desc {
+            padding: 15px;
+            text-align: center;
+        }  
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            margin: 0;
+        }
+        /* Create two equal columns that floats next to each other */
+    </style>
+	<head>
+		<title>Mane Experience Event</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link rel="shortcut icon" href="">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+        <style>body{padding-top:50px;}.starter-template{padding:40px 15px;text-align:center;}</style>
+        <!--[if IE]>
+            <script src="https://cdnjs.buttflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+            <script src="https://cdnjs.buttflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
+	<body>
+         <div class="logo"><img src="http://www.southeastern.edu/current_students/mane_exp/images/me-logo-white.png" alt="Mane Experience"></div>
+            <div class="container">
+                <div style="background-color:#2C814D !important;   border-style: hidden;
+                    border-width: 2px;
+                    border-left-width: 10px;
+                    border-right-width: 10px;
+                    border-color: #e7c225;
+                    border-radius: 0px; margin-top: 120px;" class="jumbotron">
+                    <font face=Verdana,Arial size=7, color=white><b><h2>Upcoming Mane Events</h2></b></font><br>
+                    <div id="wrapper" style="position:relative;background: #e7e7e7;
+                                             padding: 40px;
+                                             text-align: center;
+                                             width: 80%;">
+                        <div style="background-color:white;"><br>
+                            <h1>{{event.title}}</h1>
+                            <img src="https://cdn.combatcorner.com/wp-content/uploads/2013/10/05041037/sample-image37-300x200.jpg" alt="Sample Text" width="300" height="200">
+                            <div class="desc">
+                                    {{event.description}}
+                                    <h2>Date</h2>
+                                    {{event.date}}
+
+                                    <h2>Location</h2>
+                                    {{event.location}}
+                            </div>
+                            <form>
+                                <input type="text" name="wnum" placeholder="W-Number" [(ngModel)]="wnum">
+                                <input type="button" value="Check In" (click)="addAttendee()">
+                            </form><br>
+                        </div>             
+                    </div>   
+                </div>
+            </div>
+    </body>
+</html>

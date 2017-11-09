@@ -1,0 +1,215 @@
+<html lang="">
+    <style>
+    body {
+        background-image:url('http://www.southeastern.edu/current_students/mane_exp/images/mane-exp.jpg'); 
+        background-color:#2C814D;
+        background-size:cover;
+        background-repeat: repeat-y;
+        background-attachment: fixed;
+        height:100%;
+        width:100%;
+    }   
+    td.col-md-6 {
+        margin: 1%;
+        border: 1px solid #ccc;
+        width: 45%;
+        height: auto;
+    }
+    td.col-md-6:hover {
+        border: 1px solid #777;
+    }
+    td.col-md-6 img {
+        width: 100%;
+        height: auto;
+    }
+    tr.col-md-6 {
+        width: 50%;
+        height:auto;
+        border: 0px solid #ccc;
+        width: 45%;
+        height: auto;
+    }    
+    div.desc {
+        padding: 15px;
+        text-align: center;
+    }  
+    * {
+        box-sizing: border-box;
+    }
+    body {
+        margin: 0;
+    }
+    /* Create two equal columns that floats next to each other */
+    .column {
+        float: left;
+        width: 50%;
+        padding: 10px;
+        height: 300px; /* Should be removed. Only for demonstration */
+    }
+    /* Clear floats after the columns */
+    .row:after {
+        content: "";
+        display: table;
+        clear: both;
+    }      
+    </style>
+    <script>
+//function myFunction() {
+ // var input, filter, table, tr, td, i;
+  //input = document.getElementById("myInput");
+ // filter = input.value.toUpperCase();
+ // table = document.getElementById("myTable");
+ // tr = table.getElementsByTagName("tr");
+ //for (i = 0; i < tr.length; i++) {
+ 
+  //  td = tr[i].getElementsByTagName("td");
+ 
+	//if(td.length > 0){ // to avoid th
+ 
+    //   if (td[0].innerHTML.toUpperCase().indexOf(filter) > -1 || td[1].innerHTML.toUpperCase().indexOf(filter) > -1) {
+     //    tr[i].style.display = "";
+     //  } else {
+      //   tr[i].style.display = "none";
+      // }
+ 
+   // }
+ //}
+//}
+    function doSearch() {
+        var q = document.getElementById("q");
+        var v = q.value.toLowerCase();
+        var rows = document.getElementsByTagName("tr");
+        var on = 0;
+        for ( var i = 0; i < rows.length; i++ ) {
+            var fullname = rows[i].getElementsByTagName("td");
+            fullname = fullname[0].innerHTML.toLowerCase();
+            if ( fullname ) {
+                if ( v.length == 0 || (v.length < 3 && fullname.indexOf(v) == 0) || (v.length >= 3 && fullname.indexOf(v) > -1 ) ) {
+                    rows[i].style.display = "";
+                    on++;
+                } else {
+                    rows[i].style.display = "none";
+                }
+            }
+        }
+        var n = document.getElementById("noresults");
+        if ( on == 0 && n ) {
+            n.style.display = "";
+            document.getElementById("qt").innerHTML = q.value;
+        } else {
+            n.style.display = "none";
+        }
+    }
+    </script>
+
+	<head>
+		<title>MANE EXPERIENCE</title>
+         <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+    <style>body{padding-top:50px;}.starter-template{padding:40px 15px;text-align:center;}</style>
+
+    <!--[if IE]>
+        <script src="https://cdnjs.buttflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://cdnjs.buttflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+	</head>
+<body>
+<div class="logo" style="text-align:center;"><img src="http://www.southeastern.edu/current_students/mane_exp/images/me-logo-white.png" alt="Mane Experience"></div>
+<div class="container" style="text-align:center;">
+    <div style="background-color:#2C814D !important;   border-style: hidden;
+                border-width: 2px;
+                border-left-width: 10px;
+                border-right-width: 10px;
+                border-color: #e7c225;
+                border-radius: 0px;    
+                text-align:center;    
+                margin-top: 120px;" class="jumbotron">
+    <font face=Verdana,Arial size=7, color=white><b><h2>Upcoming Mane Events</h2></b></font><br>
+    <div id="wrapper" style="position:relative;background: #e7e7e7;
+                            padding: 40px;
+                            text-align: center;
+                            width: 80%;">
+    <form action="#" method="get" onsubmit="return false;">
+        <input type="text" size="30" name="q" id="q" value="" onkeyup="doSearch()" placeholder="Search for events.."  />
+    </form><br>
+
+    <table  id="myTable" border="0" cellpadding="0" cellspacing="0" width="100%" style="display:inline; text-align:center;">
+        <tr class="col-md-6" *ngFor="let event of events">
+            <td class="col-md-6" style="background-color:white;"><a style= "display:block;text-decoration : none; color : #000000;" [routerLink]="['/event', event.title]">
+            <h2>{{event.title}}</h2>
+            <img src="https://cdn.combatcorner.com/wp-content/uploads/2013/10/05041037/sample-image37-300x200.jpg" alt="Sample Text" width="300" height="200">
+            <div class="desc">{{event.description}}</div>
+            </a></td>
+        </tr>
+        <!--<tr class="col-md-6" >
+            <td class="col-md-6" style="background-color:white;"><a style= "display:block;text-decoration : none; color : #000000;" target="_blank" href="http://www.southeastern.edu/">
+            <h2>Event 2</h2>
+            <img src="https://cdn.combatcorner.com/wp-content/uploads/2013/10/05041037/sample-image37-300x200.jpg" alt="Sample Text" width="300" height="200">
+            <div class="desc">Add date of the event here</div>
+            </a></td>
+        </tr>
+        <tr class="col-md-6">
+            <td class="col-md-6" style="background-color:white;"><a style= "display:block;text-decoration : none; color : #000000;" target="_blank" href="Sampleevent.html">
+            <h2>Event 3</h2>
+            <img src="https://cdn.combatcorner.com/wp-content/uploads/2013/10/05041037/sample-image37-300x200.jpg" alt="Sample Text" width="300" height="200">
+            <div class="desc">Add date of the event here</div>
+            </a></td>
+        </tr>
+        <tr class="col-md-6">
+            <td class="col-md-6" style="background-color:white;"><a style= "display:block;text-decoration : none; color : #000000;" target="_blank" href="http://www.southeastern.edu/">
+            <h2>Event 4</h2>
+            <img src="https://cdn.combatcorner.com/wp-content/uploads/2013/10/05041037/sample-image37-300x200.jpg" alt="Sample Text" width="300" height="200">
+            <div class="desc">Add date of the event here</div>
+            </a></td>
+        </tr>
+        <tr class="col-md-6">
+            <td class="col-md-6" style="background-color:white;"><a style= "display:block;text-decoration : none; color : #000000;" target="_blank" href="http://www.southeastern.edu/">
+            <h2>Event 5</h2>
+            <img src="https://cdn.combatcorner.com/wp-content/uploads/2013/10/05041037/sample-image37-300x200.jpg" alt="Sample Text" width="300" height="200">
+            <div class="desc">Add date of the event here</div>
+            </a></td>
+        </tr>-->
+    </table>
+    </div>             
+    </div>    
+</div>
+            
+<br><br>
+<div style="background-color:#e7c225; height: 100px; text-align: center;
+    border-style: solid;
+    border-width: 15px;
+    border-left-width: 0px;
+    border-right-width: 0px;
+    border-bottom-width: 0px;
+    border-color: #2C814D; !important;">
+    <h1 style="color:black;font-size: 50px;">Info</h1>
+</div>
+<div style="background: url('http://ouwwwdev.selu.edu/_images/homepattern_cream_pixels.png') repeat; !important;">
+    <br><h1 style="background-color:#2C814D;font-size: 50px"></h1><br><br>
+    <div style="background-color:#2C814D; text-align:center;
+    border-style: solid;
+    border-width: 10px;
+    border-left-width: 0px;
+    border-right-width: 0px;
+    border-bottom-width: 0px;
+    border-color: #2C814D;
+    width:75%;
+    margin-top: 2px; !important;">
+        <font face=Verdana,Arial size=7, color=white><b><h2>Welcome to the Mane Experience</h2></b></font><br>
+        <font face=Verdana,Arial size=4, color=white><p>Welcome, Class of 2021! Your first year at Southeastern is an exciting time and will be filled with tons of academic and personal discovery, fresh experiences, and new friendships. This year is sure to be spectacular, but will certainly be a transition. Throughout the year, you will be exposed to the many diverse programs, resources, events, and services that Southeastern has to offer its students.<br><br>
+
+The Mane Experience is a unique program for the Southeastern freshman, designed to help you get the most out of your first year as a Lion so that you can find your ROAR! The Mane Experience focuses on four “mane” areas of campus life: academic success, personal health and wellness, student engagement, and lion pride. Each part of the Mane Experience goes hand-in-hand with the great things you’re learning in your classes and allows for a dynamic experience outside of the classroom.<br><br>
+
+As a Southeastern freshman you are already a part of the Mane Experience, but it’s up to you to decide your first year journey. We will keep up with your progress throughout the year and in May we will celebrate YOU and all of your Southeastern firsts!<br>
+            </p>
+        </font>
+</div>
+<br><br>
+</div>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+    <style>body{padding-top:100px;}.starter-template{padding:40px 15px;text-align:center;}</style>
+    <!--[if IE]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <nav class="navbar navbar navbar-fixed-top" role="navigation" style="height:100px; background-color: #2C814D; border-color: #e7c225; border-bottom-width: 15px;">
+        <div class="container">
+            <div class="navbar-header pull-left"style ="max-width: 100%;
+                                                        max-height: 100%;">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href = "https://www.selu.edu" class ="navbar-brand" ><img src="http://www.southeastern.edu/_resources/img/selu_logo.png" alt="Southeastern Louisiana University" ></a>
+            </div>
+            <div class="collapse navbar-collapse pull-right" >
+                <ul class="nav navbar-nav" >
+                    <li class ="active" ><a routerLink="" style= "color:white"><span class="sr-only">Link</span><span style="font-size: 50px" class="glyphicon glyphicon-home"  aria-hidden="true" ></span></a></li>
+                    <li><a routerLink="/user" style= "color:white" ><span class="sr-only">My Den Link</span><span style="font-size: 50px" class="glyphicon glyphicon-user"  aria-hidden="true" ></span></a></li>
+                    <li class="dropdown" >
+                        <a routerLink="/event" style= "color:white"  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="sr-only">Link</span><span style="font-size: 50px" class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span></a>
+                        <ul class="dropdown-menu">
+                            <li></li>
+                            <li role="separator" class="divider"></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div><!--.nav-collapse -->
+            <div class = "container">
+                <form>
+                    <br>
+                    <label style= "color:white"><b>Wnumber</b></label>
+                    <input type="text" placeholder="Enter W-Number" name="wnum" [(ngModel)]="wnum" required>
+                
+                    <label style= "color:white"><b>Password</b></label>
+                    <input type="password" placeholder="Enter Password" name="password" [(ngModel)]="password" required>
+
+                    <button type="submit" style= "color:black" (click)="authenticate()">Login</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+</body>
+
+<!-- <ul>
+    <li><a routerLink="">Home</a></li>
+    <li><a routerLink="/user">Users</a></li>
+    <li><a routerLink="/event">Events</a></li>
+</ul> -->
+<router-outlet></router-outlet>
+<footer style= "height: relative;
+background: #eee;">
+<div class="footer_logo_div"><a href="/"><img src="http://www.southeastern.edu/_resources/img/black_logo.png" alt="selu black logo" /></a><p>    <a href="#" onclick="play()">Admin</a>
+<audio id="audio" src="https://niceme.me/nicememe.mp3" ></audio></p>
+</div>
+<p>Contact information: <a href="mailto:someone@example.com">someone@example.com</a>.</p>
+</footer>

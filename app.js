@@ -1,12 +1,25 @@
 //required modules
 const express = require('express'),
+http = require('http'),
+https = require('https'),
+fs = require('fs'),
  mongoose = require('mongoose'),
- MongoClient = require('mongodb').MongoClient,
- co = require('co'),
  bodyParser = require('body-parser'),
- cors = require('cors');
+ cors = require('cors'),
+ passport = require('passport');
+ require('./config/passport')(passport);
 
- const config = require('./config/database');
+
+
+//required files
+const config = require('./config/config'),
+ Events = require('./routes/events'),
+ Users = require('./routes/users');
+
+const httpsOptions = {
+	key: fs.readFileSync('./encryption/pkey.pem'),
+	cert: fs.readFileSync('./encryption/cert.pem')
+}
 
 //connect to database
 mongoose.connect(config.database);
@@ -24,13 +37,20 @@ mongoose.connection.on('error', (err) => {
 //initilize Express app
 const app = express();
 
-const Services = require('./routes/services');
-const Categories = require('../portfolio/routes/categories');
-//port number
-const port = 3000;
 
-//Set static folder
-//app.use(express.static(path.join(__dirname, 'public')));
+//create servers
+http.createServer(app).listen(config.http, ()=>{
+	console.log('HTTP server started on port: ' + config.http)
+});
+https.createServer(httpsOptions, app).listen(config.https, ()=>{
+	console.log('HTTPS Server started on port: ' + config.https);
+});
+
+// app.listen(config.port, () => {
+// 	console.log('Server started on port ' + config.port);
+// });
+
+//--------------------MIDDLEWARE------------------------//
 
 //Cors middleware
 app.use(cors());
@@ -38,14 +58,17 @@ app.use(cors());
 //Body Parser Middleware
 app.use(bodyParser.json());
 
+//Passport Middleware
+app.use(passport.initialize());
+app.use(passport.session());
 
-app.use('/api/services', Services);
-app.use('/api/categories', Categories);
+
+//Routes
+app.use('/api/events', Events);
+app.use('/api/users', Users);
 
 app.get('/', (req, res) => {
 	res.send('Invalid Endpoint');
 });
 
-app.listen(port, () => {
-	console.log('Server started on port ' + port);
-});
+

@@ -1,5 +1,13 @@
-Services Offered-
-Web Dev, Photo
+Modles to be made
+======================
+Awards
+
+Functionality to be added
+===========================
+Friends/adding friends
+QR code to events
+
+
 
 git init
 git remote add origin <url>
@@ -8,3 +16,14 @@ git checkout <branch>
 git add .
 git commit -m "message"
 git push origin <branch>
+
++++++++++++ADD THIS TO YOUR SERVER KALEN++++++++++++++++
++++++++++++MAKE THIS A BASH FUNCTION TO KEEP BOOT CLEAN++++++++++++++
+//craft a command that removes all old versions of kernel(keep last 3)
+sudo rm -rf /boot/*-4.4.0-{75,78,79,81,83,87}-*
+
+//run this to clean up apt-get
+sudo apt-get -f install
+sudo apt-get autoremove
+sudo apt-get update
+sudo apt-get upgrade
